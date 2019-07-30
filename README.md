@@ -18,7 +18,7 @@ var_dump($result);
 
 ### Multiple Normalize
 
-Flat Array
+#### Flat Array
 
 ```php
 $n = new Normalizer([
@@ -40,7 +40,9 @@ var_dump($result);
 // ]
 ```
 
-Nested Array
+#### Nested Array
+
+(TBD)
 
 ```php
 $n = new Normalizer([
@@ -74,7 +76,15 @@ var_dump($result);
 
 ### Advanced Filters 
 
+(TBD)
+
 ```php
+Filter::is(0)->to(1);
+Filter::is(null)->to(1);
+Filter::isEmpty()->to(null);
+Filter::toInt();
+Filter::isNotNull()->toInt();
+Filter::isEmpty()->to(new CustomFilter());
 ```
 
 ### Add Filter

@@ -1,21 +1,51 @@
 <?php
+
 namespace TKuni\PhpNormalizer;
 
 use PHPUnit\Framework\TestCase;
 
-class NormalizerTest extends TestCase {
+class NormalizerTest extends TestCase
+{
 
     /**
      * @test
      */
-    public function canFilterSingleValue() {
-        $input   = '   hoge  fuga ';
-        $filters = ['trim', 'empty_to_null'];
+    public function canNormalizeMultiple()
+    {
+        $n = new Normalizer([
+            'name'   => ['trim', 'empty_to_null'],
+            'age'    => ['trim', 'empty_to_null', 'integer'],
+            'gender' => ['trim', 'empty_to_null', 'integer'],
+        ]);
 
-        $actual = Normalizer::normalize($input, $filters);
+        $actual = $n->normalize([
+            'name' => '    hoge  fuga ',
+            'age'  => ' 20 ',
+        ]);
 
-        $expect = 'hoge  fuga';
+        $expect = [
+            'name'   => 'hoge  fuga',
+            'age'    => 20,
+            'gender' => null,
+        ];
 
         $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @test
+     * @expectedException \Exception
+     */
+    public function throwExceptionIfUnknownFilter()
+    {
+
+        $n = new Normalizer([
+            'age' => ['trim', 'unknown', 'integer'],
+        ]);
+
+        $actual = $n->normalize([
+            'name' => '    hoge  fuga ',
+            'age'  => ' 20 ',
+        ]);
     }
 }
