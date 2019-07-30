@@ -74,20 +74,41 @@ var_dump($result);
 // ]
 ```
 
-### Advanced Filters 
+### Conditional Filtering 
 
 (TBD)
 
 ```php
-Filter::is(0)->to(1);
-Filter::is(null)->to(1);
-Filter::isEmpty()->to(null);
-Filter::toInt();
-Filter::isNotNull()->toInt();
-Filter::isEmpty()->to(new CustomFilter());
+use ...\Condition as Cond;
+Cond::is(0)->to(1);
+Cond::is(null)->to(1);
+Cond::isEmpty()->to(null);
+Cond::toInt();
+Cond::isNotNull()->toInt();
+Cond::isEmpty()->to(new CustomFilter());
 ```
 
-### Add Filter
+```php
+$n = new Normalizer([
+    'name'   => ['trim', Cond::isEmpty()->toNull()],
+    'age'    => ['trim', Cond::isEmpty()->toNull(), Cond::isNotEmpty()->toInt()],
+    'gender' => ['trim', Cond::isEmpty()->toNull(), Cond::isNotEmpty()->toInt()],
+]);
+
+$result = $n->normalize([
+    'name'   => '    hoge  fuga ',
+    'age'    => ' 20 ',
+]);
+
+var_dump($result);
+// [
+//   'name'   => 'hoge  fuga',
+//   'age'    => 20,
+//   'gender' => null,
+// ]
+```
+
+### Add Custom Filter
 
 ```php
 ```

@@ -19,7 +19,11 @@ class PipelineFactory implements PipelineFactoryContract
 
     public function make($filterNames){
         $filters = array_map(function($name) {
-            return $this->filterDict[$name];
+            if (is_string($name)) {
+                return $this->filterDict[$name];
+            } else {
+                return $name;
+            }
         }, $filterNames);
 
         return new Pipeline($filters);
