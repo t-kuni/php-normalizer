@@ -5,8 +5,8 @@
     "license": "",
     "authors": [
         {
-            "name": "",
-            "email": ""
+            "name": "t-kuni",
+            "email": "vartkg@gmail.com"
         }
     ],
     "type": "project",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Buonzz\\Template\\": "src/"
+            "TKuni\\PhpNormalizer\\": "src/"
         }
     }
 }

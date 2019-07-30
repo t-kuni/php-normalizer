@@ -43,7 +43,33 @@ var_dump($result);
 Nested Array
 
 ```php
+$n = new Normalizer([
+    'users.*.name'   => ['trim', 'empty_to_null'],
+    'users.*.age'    => ['trim', 'empty_to_null', 'integer'],
+]);
 
+$result = $n->normalize([
+    [
+        'name'   => '    hoge  fuga ',
+        'age'    => ' 20 ',
+    ],
+    [
+        'name'   => '',
+        'age'    => ' 20 ',
+    ],
+);
+
+var_dump($result);
+// [
+//     [
+//         'name'   => 'hoge  fuga',
+//         'age'    => 20,
+//     ],
+//     [
+//         'name'   => null,
+//         'age'    => 20,
+//     ],
+// ]
 ```
 
 ### Advanced Filters 
