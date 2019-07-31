@@ -1,5 +1,5 @@
 {
-    "name": "",
+    "name": "t-kuni/php-normalizer",
     "description": "Boilerplate package for creating other packages.",
     "keywords": ["template", "composer", "package"],
     "license": "MIT",
