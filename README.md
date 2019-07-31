@@ -7,12 +7,12 @@
 ### Single Normalize
 
 ```php
-$input  = '   hoge  fuga ';
-$filters   = ['trim', 'empty_to_null'];
+$input   = '   hoge  fuga ';
+$filters = ['trim', 'empty_to_null'];
 
 $result = Normalizer::normalize($input, $filters);
 
-var_dump($result);
+// $result is...
 // 'hoge  fuga'
 ```
 
@@ -32,7 +32,7 @@ $result = $n->normalize([
     'age'    => ' 20 ',
 ]);
 
-var_dump($result);
+// $result is...
 // [
 //   'name'   => 'hoge  fuga',
 //   'age'    => 20,
@@ -49,17 +49,19 @@ $n = new Normalizer([
 ]);
 
 $result = $n->normalize([
-    [
-        'name'   => '    hoge  fuga ',
-        'age'    => ' 20 ',
-    ],
-    [
-        'name'   => '',
-        'age'    => ' 20 ',
-    ],
+    'users' => [
+        [
+            'name'   => '    hoge  fuga ',
+            'age'    => ' 20 ',
+        ],
+        [
+            'name'   => '',
+            'age'    => ' 20 ',
+        ],
+    ]
 );
 
-var_dump($result);
+// $result is...
 // [
 //   'users' => [
 //     [
@@ -100,7 +102,7 @@ $result = $n->normalize([
     'age'    => ' 20 ',
 ]);
 
-var_dump($result);
+// $result is...
 // [
 //   'name'   => 'hoge  fuga',
 //   'age'    => 20,
