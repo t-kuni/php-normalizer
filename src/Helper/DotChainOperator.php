@@ -9,11 +9,11 @@ class DotChainOperator
 {
     public static function update($arr, $key, $val)
     {
-        $separetedKeys = explode('.', $key);
+        $separatedKeys = explode('.', $key);
         if (is_callable($val)) {
-            self::_v($arr, $separetedKeys, $val);
+            self::_v($arr, $separatedKeys, $val);
         } else {
-            self::_v($arr, $separetedKeys, function($in) use ($val) {
+            self::_v($arr, $separatedKeys, function($in) use ($val) {
                 return $val;
             });
         }
