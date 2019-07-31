@@ -2,7 +2,7 @@
     "name": "",
     "description": "Boilerplate package for creating other packages.",
     "keywords": ["template", "composer", "package"],
-    "license": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "t-kuni",
