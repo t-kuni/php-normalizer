@@ -1,3 +1,8 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/badges/build.png?b=master)](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/build-status/master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/t-kuni/php-normalizer/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+
 # PHP Normalizer
 
 (TODO)
