@@ -180,4 +180,63 @@ class DotChainOperatorTest extends TestCase
 
         $this->assertEquals($expect, $actual);
     }
+
+    /**
+     * @test
+     */
+    public function canFillIfKeyIsNotSetted()
+    {
+        $arr = [
+            'users' => [
+                [
+                    'age' => 1,
+                ],
+                [
+                    'height' => 170,
+                ],
+                'with_key' => [
+                    'name' => 'dummy',
+                ]
+            ]
+        ];
+
+        $actual = Ope::update($arr, 'users.*.name', 'new val');
+
+        $expect = [
+            'users' => [
+                [
+                    'name' => 'new val',
+                    'age' => 1,
+                ],
+                [
+                    'name' => 'new val',
+                    'height' => 170,
+                ],
+                'with_key' => [
+                    'name' => 'new val',
+                ]
+            ]
+        ];
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function canDigIfKeyIsNotExist()
+    {
+        $arr = [
+        ];
+
+        $actual = Ope::update($arr, 'user.name', 'new val');
+
+        $expect = [
+            'user' => [
+                'name' => 'new val',
+            ]
+        ];
+
+        $this->assertEquals($expect, $actual);
+    }
 }

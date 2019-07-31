@@ -42,8 +42,6 @@ var_dump($result);
 
 #### Nested Array
 
-(TBD)
-
 ```php
 $n = new Normalizer([
     'users.*.name'   => ['trim', 'empty_to_null'],

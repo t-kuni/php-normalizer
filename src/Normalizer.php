@@ -32,23 +32,15 @@ class Normalizer
     }
 
     public function normalize(array $in) {
-        $out = [];
+        $out = $in;
 
         foreach ($this->pipelines as $propName => $pipeline) {
-            if ($this->isArray($propName)) {
-                $out = DotChainOperator::update($in, $propName, function ($in) use ($pipeline) {
-                    return $pipeline->apply($in);
-                });
-            } else {
-                $out[$propName] = $pipeline->apply($in[$propName] ?? null);
-            }
+            $out = DotChainOperator::update($out, $propName, function ($in) use ($pipeline) {
+                return $pipeline->apply($in);
+            });
         }
 
         return $out;
-    }
-
-    private function isArray($propName) {
-        return strpos($propName, '.*.') !== false;
     }
 
     private function initFactory() {
