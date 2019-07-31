@@ -7,12 +7,18 @@ use Closure;
 
 class DotChainOperator
 {
-    public static function update(&$arr, $key, $val)
+    public static function update($arr, $key, $val)
     {
-        $separetedKeys = explode('.*.', $key);
-        self::_v($arr, $separetedKeys, function($in) use ($val) {
-            return $val;
-        });
+        $separetedKeys = explode('.', $key);
+        if (is_callable($val)) {
+            self::_v($arr, $separetedKeys, $val);
+        } else {
+            self::_v($arr, $separetedKeys, function($in) use ($val) {
+                return $val;
+            });
+        }
+
+        return $arr;
     }
 
     private static function _v(&$arr, array $keys, Closure $filter, $i = 0)
@@ -24,8 +30,8 @@ class DotChainOperator
 
         $currKey = $keys[$i];
 
-        if (is_array($arr[$currKey])) {
-            self::_h($arr[$currKey], $keys, $filter, $i);
+        if ($currKey === '*') {
+            self::_h($arr, $keys, $filter, $i);
         } else {
             self::_v($arr[$currKey], $keys, $filter, $i + 1);
         }

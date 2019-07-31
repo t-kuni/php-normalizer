@@ -6,6 +6,7 @@ use TKuni\PhpNormalizer\Filters\CamelToSnakeFilter;
 use TKuni\PhpNormalizer\Filters\EmptyToNullFilter;
 use TKuni\PhpNormalizer\Filters\IntegerFilter;
 use TKuni\PhpNormalizer\Filters\TrimFilter;
+use TKuni\PhpNormalizer\Helper\DotChainOperator;
 
 class Normalizer
 {
@@ -35,35 +36,9 @@ class Normalizer
 
         foreach ($this->pipelines as $propName => $pipeline) {
             if ($this->isArray($propName)) {
-                $propNames = explode('.*.', $propName);
-                $currOut = &$out;
-                $currIn = &$in;
-                for ($i = 0; $i < count($propNames); $i++) {
-                    $propName = $propNames[$i];
-                    if (!isset($currOut[$propName])) {
-                        $currOut[$propName] = null;
-                    }
-                    $currOut = &$currOut[$propName];
-
-                    $currIn = &$currIn[$propName];
-
-                    if ($i > 0) {
-                        foreach ($currin)
-                    }
-                }
-                foreach ($propNames as $i => $propName) {
-                    if (!isset($currOut[$propName])) {
-                        $currOut[$propName] = null;
-                    }
-                    $currOut = &$currOut[$propName];
-
-                    $currIns = &$currIn[$propName];
-                }
-
-                foreach ($currIns as $currIn) {
-
-                }
-                $currOut = $pipeline->apply($currIn ?? null);
+                $out = DotChainOperator::update($in, $propName, function ($in) use ($pipeline) {
+                    return $pipeline->apply($in);
+                });
             } else {
                 $out[$propName] = $pipeline->apply($in[$propName] ?? null);
             }
