@@ -5,7 +5,7 @@
 
 # PHP Normalizer
 
-(TODO)
+In development...
 
 ## Features
 
