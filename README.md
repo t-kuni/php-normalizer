@@ -63,6 +63,7 @@ $result = $n->normalize([
 
 var_dump($result);
 // [
+//   'users' => [
 //     [
 //         'name'   => 'hoge  fuga',
 //         'age'    => 20,
@@ -71,6 +72,7 @@ var_dump($result);
 //         'name'   => null,
 //         'age'    => 20,
 //     ],
+//   ]
 // ]
 ```
 

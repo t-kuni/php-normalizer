@@ -60,6 +60,45 @@ class NormalizerTest extends TestCase
 
     /**
      * @test
+     */
+    public function canNormalizeNestedArray()
+    {
+        $n = new Normalizer([
+            'users.*.name' => ['trim', 'empty_to_null'],
+            'users.*.age'  => ['trim', 'empty_to_null', 'integer'],
+        ]);
+
+        $actual = $n->normalize([
+            'users' => [
+                [
+                    'name' => '    hoge  fuga ',
+                    'age'  => ' 20 ',
+                ],
+                [
+                    'name' => '',
+                    'age'  => ' 20 ',
+                ],
+            ]
+        ]);
+
+        $expect = [
+            'users' => [
+                [
+                    'name' => 'hoge  fuga',
+                    'age'  => 20,
+                ],
+                [
+                    'name' => null,
+                    'age'  => 20,
+                ],
+            ]
+        ];
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @test
      * @expectedException \Exception
      */
     public function throwExceptionIfUnknownFilter()
