@@ -37,4 +37,11 @@ class PipelineBuilder implements PipelineBuilderContract
     private function getClassName($obj) {
         return (new \ReflectionClass($obj))->getShortName();
     }
+
+    public function registerFilters(array $filters)
+    {
+        foreach ($filters as $filter) {
+            $this->registerFilter($filter);
+        }
+    }
 }

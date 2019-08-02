@@ -2,14 +2,16 @@
 namespace TKuni\PhpNormalizer;
 
 
+use TKuni\PhpNormalizer\Contracts\NormalizerContract;
 use TKuni\PhpNormalizer\Contracts\PipelineBuilderContract;
+use TKuni\PhpNormalizer\Contracts\PipelineBuilderFactoryContract;
 use TKuni\PhpNormalizer\Filters\CamelToSnakeFilter;
 use TKuni\PhpNormalizer\Filters\EmptyToNullFilter;
 use TKuni\PhpNormalizer\Filters\IntegerFilter;
 use TKuni\PhpNormalizer\Filters\TrimFilter;
 use TKuni\PhpNormalizer\Helper\DotChainOperator;
 
-class Normalizer
+class Normalizer implements NormalizerContract
 {
     /**
      * @var array
@@ -21,13 +23,11 @@ class Normalizer
      */
     private $pipelines = [];
 
-    public function __construct(array $rules, PipelineBuilderContract $pipelineBuilder = null)
+    public function __construct(array $rules)
     {
         $this->rules = $rules;
 
-        if ($pipelineBuilder === null) {
-            $pipelineBuilder = $this->getDefaultPipelineBuilder();
-        }
+        $pipelineBuilder = $this->getPipelineBuilder();
 
         foreach ($rules as $propName => $filterNames) {
             $this->pipelines[$propName] = $pipelineBuilder->make($filterNames);
@@ -46,20 +46,8 @@ class Normalizer
         return $out;
     }
 
-    private function getDefaultPipelineBuilder() {
-        $classes = [
-            TrimFilter::class,
-            EmptyToNullFilter::class,
-            CamelToSnakeFilter::class,
-            IntegerFilter::class,
-        ];
-
-        $factory = new PipelineBuilder();
-
-        foreach ($classes as $class) {
-            $factory->registerFilter(new $class());
-        }
-
-        return $factory;
+    private function getPipelineBuilder() {
+        $pipelineBuilderFactory = Container::container()->get(PipelineBuilderFactoryContract::class);
+        return $pipelineBuilderFactory->make();
     }
 }
