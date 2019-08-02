@@ -130,7 +130,7 @@ Container::container()->get(FilterProviderContract::class)
     ->addFilter('custom_filter_name', $customFilter);
 
 $n = new Normalizer([
-    'users.*.name' => ['trim', 'custom_filter_foo'],
+    'users.*.name' => ['trim', 'custom_filter_name'],
 ]);
 
 $result = $n->normalize([
