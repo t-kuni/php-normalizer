@@ -118,4 +118,41 @@ $result = $n->normalize([
 ### Add Custom Filter
 
 ```php
+$customFilter = new class implements FilterContract
+{
+    public function apply($input)
+    {
+        return $input . '-suffix';
+    }
+}
+
+Container::container()->get(FilterProviderContract::class)
+    ->addFilter('custom_filter_name', $customFilter);
+
+$n = new Normalizer([
+    'users.*.name' => ['trim', 'custom_filter_foo'],
+]);
+
+$result = $n->normalize([
+    'users' => [
+        [
+            'name' => 'john',
+        ],
+        [
+            'name' => 'eric',
+        ],
+    ]
+]);
+
+// $result is...
+// [
+//     'users' => [
+//         [
+//             'name' => 'john-suffix',
+//         ],
+//         [
+//             'name' => 'eric-suffix',
+//         ],
+//     ]
+// ]
 ```

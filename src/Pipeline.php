@@ -23,7 +23,11 @@ class Pipeline implements PipelineContract
         $out = $input;
 
         foreach ($this->filters as $filter) {
-            $out = $filter->apply($out);
+            if (is_object($filter) && $filter instanceof \Closure) {
+                $out = $filter($out);
+            } else {
+                $out = $filter->apply($out);
+            }
         }
 
         return $out;

@@ -26,7 +26,7 @@ class Container
         $c = new BaseContainer();
 
         $c->add(PipelineBuilderFactoryContract::class, PipelineBuilderFactory::class);
-        $c->add(FilterProviderContract::class, DefaultFilterProvider::class);
+        $c->add(FilterProviderContract::class, DefaultFilterProvider::class, true);
 
         return $c;
     }

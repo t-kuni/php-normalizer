@@ -10,9 +10,11 @@ class PipelineBuilder implements PipelineBuilderContract
 {
     private $filterDict = [];
 
-    public function registerFilter(FilterContract $filter) : PipelineBuilderContract
+    public function registerFilter(FilterContract $filter, string $name = null): PipelineBuilderContract
     {
-        $name = $this->detectName($filter);
+        if ($name === null) {
+            $name = $this->detectName($filter);
+        }
         $this->filterDict[$name] = $filter;
         return $this;
     }

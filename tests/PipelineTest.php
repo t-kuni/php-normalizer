@@ -34,4 +34,21 @@ class PipelineTest extends TestCase {
 
         $this->assertEquals($expect, $actual);
     }
+
+    /**
+     * @test
+     */
+    public function canSpecifyClosure()
+    {
+        $input = '';
+
+        $actual = (new Pipeline([function ($in) {
+            return $in . ' with hoge';
+        }]))
+            ->apply($input);
+
+        $expect = ' with hoge';
+
+        $this->assertEquals($expect, $actual);
+    }
 }
