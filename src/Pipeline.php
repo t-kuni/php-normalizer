@@ -2,14 +2,14 @@
 
 namespace TKuni\PhpNormalizer;
 
-use TKuni\PhpNormalizer\contracts\PipelineContract;
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Contracts\PipelineContract;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 
 class Pipeline implements PipelineContract
 {
 
     /**
-     * @var Filter[]
+     * @var FilterContract[]
      */
     private $filters;
 

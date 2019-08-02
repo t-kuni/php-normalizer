@@ -2,6 +2,7 @@
 namespace TKuni\PhpNormalizer;
 
 
+use TKuni\PhpNormalizer\Contracts\PipelineBuilderContract;
 use TKuni\PhpNormalizer\Filters\CamelToSnakeFilter;
 use TKuni\PhpNormalizer\Filters\EmptyToNullFilter;
 use TKuni\PhpNormalizer\Filters\IntegerFilter;
@@ -20,14 +21,16 @@ class Normalizer
      */
     private $pipelines = [];
 
-    public function __construct(array $rules)
+    public function __construct(array $rules, PipelineBuilderContract $pipelineBuilder = null)
     {
-        $factory = $this->initFactory();
-
         $this->rules = $rules;
 
+        if ($pipelineBuilder === null) {
+            $pipelineBuilder = $this->getDefaultPipelineBuilder();
+        }
+
         foreach ($rules as $propName => $filterNames) {
-            $this->pipelines[$propName] = $factory->make($filterNames);
+            $this->pipelines[$propName] = $pipelineBuilder->make($filterNames);
         }
     }
 
@@ -43,7 +46,7 @@ class Normalizer
         return $out;
     }
 
-    private function initFactory() {
+    private function getDefaultPipelineBuilder() {
         $classes = [
             TrimFilter::class,
             EmptyToNullFilter::class,
@@ -51,7 +54,7 @@ class Normalizer
             IntegerFilter::class,
         ];
 
-        $factory = new PipelineFactory();
+        $factory = new PipelineBuilder();
 
         foreach ($classes as $class) {
             $factory->registerFilter(new $class());

@@ -13,7 +13,7 @@ class PipelineFactoryTest extends TestCase {
     public function canMakePipeline() {
         $input   = '   hoge  fuga ';
 
-        $factory = (new PipelineFactory())
+        $factory = (new PipelineBuilder())
             ->registerFilter(new EmptyToNullFilter())
             ->registerFilter(new TrimFilter());
 

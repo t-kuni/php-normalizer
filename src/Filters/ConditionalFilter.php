@@ -4,20 +4,20 @@
 namespace TKuni\PhpNormalizer\Filters;
 
 
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 
-class ConditionalFilter implements Filter
+class ConditionalFilter implements FilterContract
 {
     /**
      * @var array
      */
     private $conditions;
     /**
-     * @var Filter
+     * @var FilterContract
      */
     private $filter;
 
-    public function __construct(array $conditions, Filter $filter)
+    public function __construct(array $conditions, FilterContract $filter)
     {
         $this->conditions = $conditions;
         $this->filter = $filter;

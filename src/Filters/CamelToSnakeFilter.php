@@ -2,9 +2,9 @@
 
 namespace TKuni\PhpNormalizer\Filters;
 
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 
-class CamelToSnakeFilter implements Filter {
+class CamelToSnakeFilter implements FilterContract {
 
     public function apply($in)
     {

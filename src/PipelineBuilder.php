@@ -2,15 +2,15 @@
 
 namespace TKuni\PhpNormalizer;
 
-use TKuni\PhpNormalizer\contracts\PipelineFactoryContract;
+use TKuni\PhpNormalizer\Contracts\PipelineBuilderContract;
 use TKuni\PhpNormalizer\Filters\CamelToSnakeFilter;
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 
-class PipelineFactory implements PipelineFactoryContract
+class PipelineBuilder implements PipelineBuilderContract
 {
     private $filterDict = [];
 
-    public function registerFilter(Filter $filter) : PipelineFactoryContract
+    public function registerFilter(FilterContract $filter) : PipelineBuilderContract
     {
         $name = $this->detectName($filter);
         $this->filterDict[$name] = $filter;
@@ -29,7 +29,7 @@ class PipelineFactory implements PipelineFactoryContract
         return new Pipeline($filters);
     }
 
-    private function detectName(Filter $filter) {
+    private function detectName(FilterContract $filter) {
         $key = preg_replace('/Filter$/', '', $this->getClassName($filter));
         return (new CamelToSnakeFilter())->apply($key);
     }

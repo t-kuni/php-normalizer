@@ -4,7 +4,7 @@ namespace TKuni\PhpNormalizer;
 
 use TKuni\PhpNormalizer\Filters\ConditionalFilter;
 use TKuni\PhpNormalizer\Filters\IntegerFilter;
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 use TKuni\PhpNormalizer\Filters\ToNullFilter;
 
 class Condition

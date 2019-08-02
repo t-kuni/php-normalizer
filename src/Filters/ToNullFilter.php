@@ -2,9 +2,9 @@
 
 namespace TKuni\PhpNormalizer\Filters;
 
-use TKuni\PhpNormalizer\Filters\interfaces\Filter;
+use TKuni\PhpNormalizer\Filters\Contracts\FilterContract;
 
-class ToNullFilter implements Filter {
+class ToNullFilter implements FilterContract {
 
     public function apply($input)
     {
