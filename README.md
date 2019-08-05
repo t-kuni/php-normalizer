@@ -81,6 +81,8 @@ $result = $n->normalize([
 // ]
 ```
 
+[More details](docs/conditional_filters)
+
 ### Conditional Filtering 
 
 (TBD)
@@ -114,6 +116,8 @@ $result = $n->normalize([
 //   'gender' => null,
 // ]
 ```
+
+[More details](docs/conditional_filters)
 
 ### Add Custom Filter
 
