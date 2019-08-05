@@ -1,35 +1,72 @@
-### Conditional Filtering 
+# Conditional Filtering 
 
 (TBD)
 
-```php
-use ...\Condition as Cond;
-Cond::is(0)->to(1);
-Cond::is(null)->to(1);
-Cond::isEmpty()->to(null);
-Cond::toInt();
-Cond::isNotNull()->toInt();
-Cond::isEmpty()->to(new CustomFilter());
+## Condition Part
+
+### Specify Value
+
+```
+Cond::is(0)
+Cond::is('target_value')
 ```
 
-#### example
+### Type
 
-```php
-$n = new Normalizer([
-    'name'   => ['trim', Cond::is('foo')->to('bar')],
-    'age'    => ['trim', Cond::isEmpty()->toNull(), Cond::isNotEmpty()->toInt()],
-    'gender' => ['trim', Cond::isEmpty()->toNull(), Cond::isNotEmpty()->toInt()],
-]);
+```
+Cond::isNull()
+Cond::isEmpty()
+```
 
-$result = $n->normalize([
-    'name'   => '    hoge  fuga ',
-    'age'    => ' 20 ',
-]);
+### Closure
 
-// $result is...
-// [
-//   'name'   => 'hoge  fuga',
-//   'age'    => 20,
-//   'gender' => null,
-// ]
+```
+Cond::is(function($in) {
+    return $in === 'target value',
+})
+```
+
+### Anything
+
+```
+Cond::isAny()
+```
+
+## Output Part
+
+### Specify Value
+
+```
+Cond::isAny()->to(0)
+Cond::isAny()->to('new string')
+```
+
+### Cast type
+
+```
+Cond::isAny()->toInt();
+Cond::isAny()->toBoolean();
+Cond::isAny()->toFloat();
+Cond::isAny()->toString();
+```
+
+### Closure
+
+```
+Cond::isAny()->to(function($in) {
+    return $in . ' suffix';
+})
+```
+
+### Filter
+
+```
+Cond::isAny()->toFilter('trim')
+Cond::isAny()->toFilter(new class implements FilterContract
+{
+    public function apply($input)
+    {
+        return $input . '-suffix';
+    }
+});
 ```
