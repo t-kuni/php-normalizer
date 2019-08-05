@@ -81,7 +81,7 @@ $result = $n->normalize([
 // ]
 ```
 
-[More details](docs/conditional_filters.md)
+[More details](docs/build_in_filters.md)
 
 ### Conditional Filtering 
 
