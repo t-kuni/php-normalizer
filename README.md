@@ -83,6 +83,14 @@ $result = $n->normalize([
 
 [More details](docs/build_in_filters.md)
 
+### Advanced Filtering
+
+You can use Filter facade when you want to specify arguments.
+
+```
+Filter::replace('aaa', 'bbb')
+```
+
 ### Conditional Filtering 
 
 (TBD)

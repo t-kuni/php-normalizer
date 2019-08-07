@@ -14,7 +14,6 @@ Cond::is('target_value')
 ### Type
 
 ```
-Cond::isNull()
 Cond::isEmpty()
 ```
 
