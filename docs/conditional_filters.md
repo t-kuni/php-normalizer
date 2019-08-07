@@ -32,6 +32,18 @@ Cond::is(function($in) {
 Cond::isAny()
 ```
 
+### Contains
+
+```
+Cond::isContains()
+```
+
+### Regular Expression
+
+```
+Cond::isRegexp()
+```
+
 ## Output Part
 
 ### Specify Value

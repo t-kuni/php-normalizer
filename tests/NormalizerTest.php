@@ -13,7 +13,7 @@ class NormalizerTest extends TestCase
     /**
      * @test
      */
-    public function canNormalizeMultiple()
+    public function canNormalizeDict()
     {
         $n = new Normalizer([
             'name'   => ['trim', 'empty_to_null'],
@@ -63,7 +63,7 @@ class NormalizerTest extends TestCase
     /**
      * @test
      */
-    public function canNormalizeNestedArray()
+    public function canNormalizeNestedDict()
     {
         $n = new Normalizer([
             'users.*.name' => ['trim', 'empty_to_null'],
@@ -93,6 +93,34 @@ class NormalizerTest extends TestCase
                     'name' => null,
                     'age'  => 20,
                 ],
+            ]
+        ];
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function canNormalizeArray()
+    {
+        $n = new Normalizer([
+            'names.*' => ['trim'],
+        ]);
+
+        $actual = $n->normalize([
+            'names' => [
+                'Alice',
+                ' Bob ',
+                'Carol',
+            ]
+        ]);
+
+        $expect = [
+            'names' => [
+                'Alice',
+                'Bob',
+                'Carol',
             ]
         ];
 
