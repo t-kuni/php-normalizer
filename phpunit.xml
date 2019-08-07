@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<phpunit
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        verbose="true"
+        stopOnFailure="true"
+        processIsolation="false"
+        backupGlobals="false"
+>
+    <logging>
+        <log type="coverage-html" target="./report" />
+    </logging>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

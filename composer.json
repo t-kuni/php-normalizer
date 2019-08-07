@@ -15,11 +15,14 @@
         "league/container": "^3.3"
     },
     "require-dev": {
-		"phpunit/phpunit": "6.*"
+		"phpunit/phpunit": "8.*"
     },
     "autoload": {
         "psr-4": {
             "TKuni\\PhpNormalizer\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "phpunit tests"
     }
 }
