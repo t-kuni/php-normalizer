@@ -10,7 +10,7 @@
         backupGlobals="false"
 >
     <logging>
-        <log type="coverage-html" target="./report" />
+        <log type="coverage-clover" target="./coverage-report.xml" />
     </logging>
 
     <filter>
