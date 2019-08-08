@@ -1,4 +1,4 @@
 vendor
-report
 .idea
 .phpunit.result.cache
+coverage-report.xml
